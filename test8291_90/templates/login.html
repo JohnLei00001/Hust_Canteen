@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}hust哈食堂 - 登录{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-form">
+    <div class="canteen-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,12.8 15.1,13.9 14,14.6V16H10V14.6C8.9,13.9 8.2,12.8 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,9.2C11,9.2 10.2,10 10.2,11C10.2,12 11,12.8 12,12.8C13,12.8 13.8,12 13.8,11C13.8,10 13,9.2 12,9.2Z" />
+      </svg>
+    </div>
+    <h2>hust哈食堂</h2>
+    <p class="welcome-message">发现校园最美味的角落</p>
+    
+    <!-- 缓存清除提示 -->
+    <div class="cache-notice" style="background: #fff3cd; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 14px;">
+      <strong>💡 提示：</strong>如果遇到登录问题，请尝试清除浏览器缓存或使用隐私模式
+    </div>
+    
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username" placeholder="输入你的用户名" required>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password" placeholder="输入你的密码" required>
+      </div>
+      <div class="form-group remember">
+        <input type="checkbox" id="remember" name="remember">
+        <label for="remember">记住我</label>
+      </div>
+      <button type="submit" class="btn">登录</button>
+    </form>
+    
+    <div class="auth-links">
+      <a href="{{ url_for('register') }}">注册新账号</a>
+      <a href="{{ url_for('guest_mode') }}">访客模式</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

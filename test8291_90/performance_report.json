@@ -1,0 +1,81 @@
+{
+  "api_tests": [
+    {
+      "endpoint": "/api/recommendations/dishes",
+      "method": "GET",
+      "status_code": 200,
+      "response_time_ms": 2036.8540287017822,
+      "success": true,
+      "timestamp": "2025-09-02T00:07:51.701512"
+    },
+    {
+      "endpoint": "/api/recommendations/canteens",
+      "method": "GET",
+      "status_code": 200,
+      "response_time_ms": 2033.2036018371582,
+      "success": true,
+      "timestamp": "2025-09-02T00:07:53.734808"
+    },
+    {
+      "endpoint": "/api/recommendations/stalls",
+      "method": "GET",
+      "status_code": 200,
+      "response_time_ms": 2018.2576179504395,
+      "success": true,
+      "timestamp": "2025-09-02T00:07:55.753292"
+    },
+    {
+      "endpoint": "/api/rankings/popular_dishes",
+      "method": "GET",
+      "status_code": 200,
+      "response_time_ms": 2044.0208911895752,
+      "success": true,
+      "timestamp": "2025-09-02T00:07:57.797428"
+    },
+    {
+      "endpoint": "/api/search?q=红烧肉&type=all",
+      "method": "GET",
+      "status_code": 200,
+      "response_time_ms": 2027.836561203003,
+      "success": true,
+      "timestamp": "2025-09-02T00:07:59.825384"
+    },
+    {
+      "endpoint": "/api/canteens",
+      "method": "GET",
+      "status_code": 404,
+      "response_time_ms": 2027.01735496521,
+      "success": false,
+      "timestamp": "2025-09-02T00:08:01.852684"
+    }
+  ],
+  "db_tests": [
+    {
+      "name": "推荐菜品查询",
+      "query_time_ms": 1.6820430755615234,
+      "success": false,
+      "error": "1054 (42S22): Unknown column 'd.price' in 'field list'",
+      "timestamp": "2025-09-02T00:08:02.036332"
+    },
+    {
+      "name": "食堂拥挤度查询",
+      "query_time_ms": 9.495258331298828,
+      "success": false,
+      "error": "1054 (42S22): Unknown column 'c.location' in 'field list'",
+      "timestamp": "2025-09-02T00:08:02.045839"
+    },
+    {
+      "name": "搜索查询",
+      "query_time_ms": 0.4076957702636719,
+      "success": false,
+      "error": "1054 (42S22): Unknown column 'd.price' in 'field list'",
+      "timestamp": "2025-09-02T00:08:02.046258"
+    }
+  ],
+  "summary": {
+    "total_apis": 6,
+    "successful_apis": 5,
+    "slow_apis": 5,
+    "slow_queries": 0
+  }
+}

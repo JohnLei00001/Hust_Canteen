@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>华科食堂 - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ config.get('VERSION', '1.0') }}">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="{{ url_for('dashboard') }}">hust哈食堂</a>
+            </div>
+            {% if 'user_id' in session and not session.get('is_guest') %}
+            <div class="user-menu">
+                <span>欢迎, {{ session['username'] }}</span>
+                <div class="dropdown">
+                    <a href="{{ url_for('my_favorites') }}">我的收藏</a>
+                    <a href="{{ url_for('profile') }}">个人中心</a>
+                    {% if session.get('is_admin') %}
+                    <a href="{{ url_for('admin_bug_reports') }}">问题管理</a>
+                    {% endif %}
+                    <a href="{{ url_for('logout') }}">退出登录</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="auth-buttons">
+                <a href="{{ url_for('login') }}" class="btn-login">登录</a>
+                <a href="{{ url_for('register') }}" class="btn-register">注册</a>
+            </div>
+            {% endif %}
+        </div>
+    </header>
+    
+    <!-- 悬浮问题反馈按钮 -->
+    <a href="{{ url_for('bug_report') }}" class="floating-feedback-btn" title="问题反馈">
+        <span style="font-size: 24px; font-weight: bold;">?</span>
+    </a>
+    
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+{% block title %}提交问题反馈 - hust哈食堂{% endblock %}
+{% block content %}
+<div class="bug-report-container">
+    <h1>问题反馈</h1>
+    <p class="description">帮助我们改进系统，您的每一个反馈都很重要！</p>
+    
+    <form id="bug-report-form" class="bug-report-form">
+        <div class="form-group">
+            <label for="title">问题标题 *</label>
+            <input type="text" id="title" name="title" required maxlength="200" 
+                   placeholder="请简要描述问题，例如：搜索功能无法使用">
+        </div>
+        
+        <div class="form-group">
+            <label for="type">问题类型 *</label>
+            <select id="type" name="type" required>
+                <option value="">请选择类型</option>
+                <option value="功能错误">功能错误</option>
+                <option value="界面问题">界面问题</option>
+                <option value="性能问题">性能问题</option>
+                <option value="建议改进">建议改进</option>
+                <option value="其他">其他</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="priority">优先级</label>
+            <select id="priority" name="priority">
+                <option value="低">低</option>
+                <option value="中" selected>中</option>
+                <option value="高">高</option>
+                <option value="紧急">紧急</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">详细描述 *</label>
+            <textarea id="description" name="description" required rows="6" 
+                      placeholder="请详细描述：
+1. 问题发生的具体步骤
+2. 期望的结果
+3. 实际的结果
+4. 如果有错误信息请一并提供"></textarea>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">
+                <span class="btn-text">提交反馈</span>
+                <span class="loading-text" style="display: none;">提交中...</span>
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()">取消</button>
+        </div>
+    </form>
+    
+    <div id="success-message" class="success-message" style="display: none;">
+        <h3>✅ 提交成功！</h3>
+        <p>感谢您的反馈，我们会尽快处理您提交的问题。</p>
+        <button onclick="window.location.href='/'" class="btn btn-primary">返回首页</button>
+    </div>
+</div>
+
+<style>
+.bug-report-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.bug-report-container h1 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: var(--accent-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #E64A19;
+}
+
+.btn-secondary {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.btn-secondary:hover {
+    background: #e0e0e0;
+}
+
+.success-message {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.success-message h3 {
+    color: #4CAF50;
+    margin-bottom: 15px;
+}
+
+.error-message {
+    color: #f44336;
+    text-align: center;
+    margin: 10px 0;
+}
+</style>
+
+<script>
+document.getElementById('bug-report-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const loadingText = submitBtn.querySelector('.loading-text');
+    
+    // 显示加载状态
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    loadingText.style.display = 'inline';
+    
+    try {
+        const response = await fetch('/api/bug-report', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(Object.fromEntries(formData))
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+            document.getElementById('bug-report-form').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        } else {
+            throw new Error(result.error || '提交失败');
+        }
+    } catch (error) {
+        alert('提交失败：' + error.message);
+        // 重置按钮状态
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        loadingText.style.display = 'none';
+    }
+});
+</script>
+{% endblock %}

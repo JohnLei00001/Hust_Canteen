@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}hust哈食堂 - 注册{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-form">
+    <div class="canteen-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,12.8 15.1,13.9 14,14.6V16H10V14.6C8.9,13.9 8.2,12.8 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,9.2C11,9.2 10.2,10 10.2,11C10.2,12 11,12.8 12,12.8C13,12.8 13.8,12 13.8,11C13.8,10 13,9.2 12,9.2Z" />
+      </svg>
+    </div>
+    <h2>加入食堂探索</h2>
+    <p class="welcome-message">分享你的美食发现</p>
+    
+    <form method="POST" action="{{ url_for('register') }}" onsubmit="return validateForm()">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username" placeholder="创建一个独特的用户名" required minlength="1">
+        <small>至少1个字符，取一个有趣的昵称吧</small>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password" placeholder="设置你的密码" required minlength="6">
+        <small>至少6个字符，保护你的美食记录</small>
+      </div>
+      <div class="form-group">
+        <label for="confirm_password">确认密码</label>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="再次输入密码" required>
+      </div>
+      <button type="submit" class="btn">开始探索</button>
+    </form>
+    
+    <div class="auth-links">
+      <a href="{{ url_for('login') }}">已有账号? 直接登录</a>
+      <a href="{{ url_for('guest_mode') }}">先随便看看</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

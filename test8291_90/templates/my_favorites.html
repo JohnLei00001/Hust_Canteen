@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}我的收藏{% endblock %}
+{% block content %}
+<div class="dashboard-container">
+  <!-- 独立搜索栏 -->
+  <div class="standalone-search">
+    <form class="search-form" id="search-form">
+      <input type="text" id="search-input" placeholder="搜索食堂、窗口或菜品..." required>
+      <button type="submit" class="search-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- 收藏列表 -->
+  <div id="favorites-container" class="recommendation-scroll" style="flex-wrap:wrap">
+    <div class="loading-spinner"></div>
+  </div>
+</div>
+
+<!-- 弹窗骨架（与详情页共用） -->
+<div id="detail-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" data-close>&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- 评价弹窗骨架（放在 </body> 前即可） -->
+<div id="rating-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" data-close>&times;</span>
+    <div id="rating-modal-body"></div>
+  </div>
+</div>
+
+<script>
+  // 传递当前用户ID给JavaScript
+  var sessionUserId = '{{ session.get("user_id", "") }}';
+  const sessionIsGuest = {{ 'true' if session.get('is_guest') else 'false' }};
+</script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+<script src="{{ url_for('static', filename='js/favorites.js') }}"></script>
+{% endblock %}

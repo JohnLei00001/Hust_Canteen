@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block title %}hust哈食堂 - 首页{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <!-- 独立搜索栏 -->
+  <div class="standalone-search">
+    <form class="search-form">
+      <input type="text" id="search-input" placeholder="搜索食堂、窗口或菜品..." required>
+      <button type="submit" class="search-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  <!-- 搜索结果显示区域 -->
+  <div id="search-results" class="search-results hidden">
+    <div class="close-results">×</div>
+    <div class="results-container" id="results-container"></div>
+  </div>
+
+  <!-- 用户欢迎信息 -->
+  <div class="welcome-section">
+    <h2>欢迎回来, {{ session['username'] }}!</h2>
+    {% if session.get('is_guest') %}
+      <p>你正在以访客身份浏览，注册后可以收藏你喜欢的美食!</p>
+    {% else %}
+      <p>今天想探索哪个食堂呢? 看看同学们都推荐了什么美食!</p>
+    {% endif %}
+  </div>
+
+  <!-- 推荐区域 -->
+  <div class="recommendation-section">
+    <h3 class="section-title">
+      <span class="title-icon">✨</span> 为你推荐
+      <span class="refresh-btn" onclick="refreshRecommendations()">换一批</span>
+    </h3>
+    
+    <!-- 推荐类型选择标签 -->
+    <div class="recommendation-tabs">
+      <button class="rec-tab-btn active" onclick="showRecommendations('all')">全部推荐</button>
+      <button class="rec-tab-btn" onclick="showRecommendations('dishes')">推荐菜品</button>
+      <button class="rec-tab-btn" onclick="showRecommendations('canteens')">推荐食堂</button>
+      <button class="rec-tab-btn" onclick="showRecommendations('stalls')">推荐窗口</button>
+    </div>
+    
+    <div class="recommendation-scroll" id="recommendation-scroll">
+      <!-- 推荐项将通过JavaScript动态加载 -->
+    </div>
+  </div>
+
+  <!-- 榜单区域 -->
+  <div class="ranking-section">
+    <div class="ranking-tabs">
+      <button class="tab-btn active" onclick="showRanking('popular')">好评榜</button>
+      <button class="tab-btn" onclick="showRanking('crowded')">人气榜</button>
+      <button class="tab-btn" onclick="showRanking('quick')">免排队</button>
+      <button class="tab-btn" onclick="showRanking('easy-seat')">好找座</button>
+      <button class="tab-btn" onclick="showRanking('join-fun')">凑热闹</button>
+    </div>
+    
+    <div class="ranking-content">
+      <div id="popular-ranking" class="ranking-list">
+        <!-- 好评榜内容将通过JavaScript动态加载 -->
+      </div>
+      <div id="crowded-ranking" class="ranking-list hidden">
+        <!-- 人气榜内容将通过JavaScript动态加载 -->
+      </div>
+      <div id="quick-ranking" class="ranking-list hidden">
+        <!-- 免排队榜内容将通过JavaScript动态加载 -->
+      </div>
+      <div id="easy-seat-ranking" class="ranking-list hidden">
+        <!-- 好找座榜内容将通过JavaScript动态加载 -->
+      </div>
+      <div id="join-fun-ranking" class="ranking-list hidden">
+        <!-- 凑热闹榜内容将通过JavaScript动态加载 -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 在文件末尾，详情模态框之前添加遮罩层 -->
+<div class="overlay hidden" id="search-overlay"></div>
+
+<!-- 详情模态框 -->
+<div id="detail-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" data-close>&times;</span>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- 评分模态框 -->
+<div id="rating-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" data-close>&times;</span>
+    <div id="rating-modal-body"></div>
+  </div>
+</div>
+
+<!-- 拥挤度反馈模态框 -->
+<div id="crowd-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-modal" data-close>&times;</span>
+    <div id="crowd-modal-body"></div>
+  </div>
+</div>
+
+<script>
+  // 设置当前用户会话信息供JavaScript使用
+  const sessionUserId = '{{ session.get("user_id", "") }}';
+  const sessionIsGuest = {{ 'true' if session.get('is_guest') else 'false' }};
+</script>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

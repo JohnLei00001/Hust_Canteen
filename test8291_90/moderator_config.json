@@ -1,0 +1,8 @@
+{
+  "encryption_key": "helloworld",
+  "encrypted_words_file": "encrypted_sensitive_words.json",
+  "backup_file": "encrypted_moderator_data.json",
+  "security_level": "high",
+  "enable_logging": true,
+  "enable_contact_detection": true
+}
