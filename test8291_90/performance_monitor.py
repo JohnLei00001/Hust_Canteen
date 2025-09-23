@@ -19,7 +19,7 @@ class PerformanceMonitor:
         self.db_config = {
             'host': 'localhost',
             'user': 'root',
-            'password': 'Ray123_123',
+            'password': 'your_pswd',
             'database': 'hust_canteen'
         }
         self.results = []
