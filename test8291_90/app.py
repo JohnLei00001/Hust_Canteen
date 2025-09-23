@@ -14,7 +14,7 @@ from security_middleware import SecurityMiddleware, SecurityLogger
 from ddos_protection import ddos_protection, login_protection, rate_limit
 
 app = Flask(__name__)
-app.secret_key = 'helloworld'  # 生产环境请使用更安全的密钥
+app.secret_key = 'your_key'  # 生产环境请使用更安全的密钥
 app.config['VERSION'] = '1.0.1'  # 版本号用于缓存清除
 bcrypt = Bcrypt(app)
 
@@ -38,7 +38,7 @@ def after_request(response):
 db_config = {
     'host': 'localhost',
     'user': 'root',
-    'password': 'Ray123_123',
+    'password': 'your_pswd',
     'database': 'hust_canteen'
 }
 
@@ -1870,9 +1870,5 @@ def add_bug_report_notes(report_id):
 if __name__ == '__main__':
     # 生产环境配置
     print("🍽️ 华科食堂推荐系统 - 生产模式")
-    print("✅ 绑定域名: canteen.seasideray.cn")
-    print("✅ 监听地址: 0.0.0.0:5000")
-    print("✅ 公网IP: 114.132.230.241")
-    print("⚠️  请确保DNS已配置: canteen.seasideray.cn -> 114.132.230.241")
     
     app.run(host='0.0.0.0', port=5000, debug=False)
