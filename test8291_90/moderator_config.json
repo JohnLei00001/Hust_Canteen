@@ -1,5 +1,5 @@
 {
-  "encryption_key": "helloworld",
+  "encryption_key": "your_key",
   "encrypted_words_file": "encrypted_sensitive_words.json",
   "backup_file": "encrypted_moderator_data.json",
   "security_level": "high",
