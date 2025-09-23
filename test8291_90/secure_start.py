@@ -59,7 +59,7 @@ def check_secret_key():
     """检查SECRET_KEY配置"""
     try:
         from app import app
-        if app.secret_key == 'helloworld':
+        if app.secret_key == 'your_key':
             return "使用了默认SECRET_KEY，请更改为安全的密钥"
         return True
     except:
