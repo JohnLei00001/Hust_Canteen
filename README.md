@@ -1,9 +1,7 @@
 # HUST食堂评价系统
 
-![系统界面](static/images/dish-default.jpg)
-
 ## 项目概述
-华中科技大学食堂评价平台，提供安全的匿名评价、内容审核和管理功能，包含完整的安全防护机制。
+华中科技大学食堂指南平台，提供安全的匿名评价和管理功能，包含完整的安全防护机制。
 
 ## 核心功能
 
@@ -20,7 +18,7 @@
 - ⚙️ 自动化数据库维护
 - 🚨 安全事件监控
 
-这是一个为华中科技大学设计的校园食堂评价平台，学生可以匿名评价各个食堂的菜品和服务质量。系统采用Flask框架开发，包含完整的内容审核、安全防护和性能优化功能。
+这是一个为华中科技大学设计的校园食堂评价指南平台，学生可以匿名评价交流各个食堂的菜品和服务质量。系统采用Flask框架开发，包含完整的内容审核、安全防护和性能优化功能。
 
 ## ✨ 主要功能
 
@@ -62,98 +60,6 @@
 - CentOS 7 (推荐) / Windows
 - 2GB+ RAM
 - 10GB+ 存储空间
-
-## 🚀 快速部署
-
-### 环境要求
-- Python 3.6+
-- MySQL 8.0+
-- 内存2GB+
-
-
-## 技术架构
-```
-test8291_90/
-├── app.py                 # Flask主应用
-├── security_middleware   # 安全验证中间件
-├── content_moderator      # 评价内容审核
-├── ddos_protection       # 流量防护模块
-├── performance_monitor   # 性能监控系统
-├── static/               # 前端资源
-│   ├── css/             # 样式文件
-│   ├── js/              # 交互脚本
-│   └── images/          # 食堂实景图
-└── templates/           # 页面模板
-    ├── dashboard.html   # 主界面
-    └── admin/           # 管理后台
-```
-
-## 🔐 安全说明
-
-### 生产环境部署注意事项
-
-1. **修改默认密钥**: 务必修改 `app.secret_key` 和数据库密码
-2. **使用HTTPS**: 生产环境必须使用SSL证书
-3. **环境变量**: 敏感信息通过环境变量传递
-4. **定期备份**: 定期备份数据库和重要文件
-5. **监控日志**: 定期检查安全日志文件
-
-### 安全配置文件
-
-- `security_config.py` - 安全策略配置
-- `ENCRYPTED_MODERATOR_GUIDE.md` - 加密审核模块指南
-- `SECURITY_CHECKLIST.md` - 安全检查清单
-
-## 📊 性能优化
-
-系统包含完整的性能优化功能：
-
-- **数据库优化**: 索引优化、查询优化
-- **缓存机制**: 智能缓存策略
-- **连接池**: 数据库连接池管理
-- **监控工具**: 实时性能监控
-
-使用以下命令进行性能优化：
-
-```bash
-python run_optimization.py
-python performance_monitor.py
-```
-
-## 🐛 故障排除
-
-### 常见问题
-
-1. **数据库连接失败**
-   - 检查MySQL服务状态
-   - 验证数据库配置
-   - 检查用户权限
-
-2. **权限错误**
-   - 检查文件权限
-   - 验证上传目录权限
-   - 检查SELinux设置
-
-3. **性能问题**
-   - 查看性能报告 `performance_report.json`
-   - 运行优化脚本
-   - 检查数据库索引
-
-### 修复脚本
-
-项目提供多种修复脚本：
-
-- `run_mysql_fix.py` - 数据库修复
-- `fix_db_step_by_step.sql` - 数据库结构修复
-- `run_fix.bat` - Windows修复脚本
-
-## 🤝 贡献指南
-
-1. Fork 项目
-2. 创建功能分支 (`git checkout -b feature/amazing-feature`)
-3. 提交更改 (`git commit -m 'Add some amazing feature'`)
-4. 推送到分支 (`git push origin feature/amazing-feature`)
-5. 创建 Pull Request
 
 ## 📝 许可证
 
