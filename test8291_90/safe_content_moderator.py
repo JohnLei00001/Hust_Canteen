@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 class SafeContentModerator:
     """安全内容审核包装器"""
     
-    def __init__(self, password: str = "helloworld", config_file: str = "moderator_config.json"):
+    def __init__(self, password: str = "your_pswd", config_file: str = "moderator_config.json"):
         """初始化安全审核器，使用指定密码"""
         try:
             self.moderator = EncryptedContentModerator(password=password)
