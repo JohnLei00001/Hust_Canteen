@@ -9,7 +9,7 @@ def demo_integration():
     """演示如何集成到你的食堂系统"""
     
     print("=== 食堂系统敏感词检测集成示例 ===")
-    print("密钥: helloworld")
+    print("密钥: your_key")
     print()
     
     # 方法1: 使用全局函数
