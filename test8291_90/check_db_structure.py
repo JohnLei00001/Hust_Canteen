@@ -13,7 +13,7 @@ def check_foreign_keys():
         conn = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='Ray123_123',
+            password='your_paswd',
             database='hust_canteen'
         )
         
@@ -71,7 +71,7 @@ def fix_foreign_key_constraint():
         conn = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='Ray123_123',
+            password='your_pswd',
             database='hust_canteen'
         )
         
