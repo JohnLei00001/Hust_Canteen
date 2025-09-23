@@ -13,7 +13,7 @@ def check_foreign_keys():
         conn = mysql.connector.connect(
             host='localhost',
             user='root',
-            password='your_paswd',
+            password='your_pswd',
             database='hust_canteen'
         )
         
