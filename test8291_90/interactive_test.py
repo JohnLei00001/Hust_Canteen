@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 交互式敏感词检测测试工具
-使用密钥: helloworld
+使用密钥: your_key
 """
 
 import sys
@@ -18,7 +18,7 @@ class InteractiveTester:
         self.moderator = SafeContentModerator(password="helloworld")
         print("🎯 交互式敏感词检测测试工具")
         print("=" * 50)
-        print("密钥: helloworld")
+        print("密钥: your_key")
         print("加密文件: encrypted_sensitive_words.json")
         print("=" * 50)
         print()
