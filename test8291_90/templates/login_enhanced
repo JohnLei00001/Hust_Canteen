@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+{% block title %}hust哈食堂 - 登录{% endblock %}
+
+{% block content %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<style>
+  /* 外层容器，占满屏幕，垂直居中 */
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 5px;
+    background: #f5f5f5;
+    box-sizing: border-box;
+  }
+
+  /* 表单卡片，自适应屏幕高度 */
+  .auth-form {
+    width: 90%;
+    max-width: 360px;
+    background: #fff;
+    padding: 2vh 2vw; /* 根据视口自适应内边距 */
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+  }
+
+  /* 图标 */
+  .canteen-icon {
+    width: 10vw;      /* 根据屏幕宽度自适应大小 */
+    height: 10vw;
+    max-width: 60px;
+    max-height: 60px;
+    margin: 0 auto 1vh;
+  }
+  .canteen-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  h2 {
+    text-align: center;
+    font-size: 4vw;   /* 自适应屏幕宽度 */
+    max-font-size: 18px;
+    margin-bottom: 0.5vh;
+  }
+
+  .welcome-message {
+    text-align: center;
+    font-size: 3vw;
+    max-font-size: 14px;
+    margin-bottom: 1vh;
+    color: #666;
+  }
+
+  .cache-notice {
+    background: #fff3cd;
+    padding: 0.8vh 1vw;
+    border-radius: 5px;
+    margin-bottom: 1vh;
+    font-size: 2.8vw;
+    max-font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .form-group {
+    margin-bottom: 1vh;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 0.3vh;
+    font-size: 3vw;
+    max-font-size: 13px;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="password"] {
+    width: 100%;
+    padding: 1.2vh 1vw;
+    font-size: 3vw;
+    max-font-size: 13px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+
+  .form-group.remember {
+    display: flex;
+    align-items: center;
+  }
+  .form-group.remember label {
+    margin-left: 5px;
+    font-size: 2.8vw;
+    max-font-size: 12px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 1.5vh 0;
+    font-size: 4vw;
+    max-font-size: 14px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 0.5vh;
+  }
+
+  .auth-links {
+    margin-top: 1vh;
+    display: flex;
+    justify-content: space-between;
+    font-size: 3vw;
+    max-font-size: 12px;
+  }
+  .auth-links a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  /* 更小屏幕优化 */
+  @media (max-height: 550px) {
+    .auth-form {
+      padding: 1.5vh 1vw;
+    }
+    h2 { font-size: 16px; }
+    .welcome-message { font-size: 12px; }
+    .cache-notice { font-size: 12px; }
+    .form-group input { font-size: 12px; padding: 6px 8px; }
+    .btn { font-size: 13px; padding: 8px 0; }
+    .auth-links { font-size: 11px; }
+  }
+</style>
+
+<div class="auth-container">
+  <div class="auth-form">
+    <div class="canteen-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,12.8 15.1,13.9 14,14.6V16H10V14.6C8.9,13.9 8.2,12.8 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,9.2C11,9.2 10.2,10 10.2,11C10.2,12 11,12.8 12,12.8C13,12.8 13.8,12 13.8,11C13.8,10 13,9.2 12,9.2Z" />
+      </svg>
+    </div>
+    <h2>hust哈食堂</h2>
+    <p class="welcome-message">发现校园最美味的角落</p>
+
+    <div class="cache-notice">
+      <strong>💡 提示：</strong>如果遇到登录问题，请尝试清除浏览器缓存或使用隐私模式
+    </div>
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username" placeholder="输入你的用户名" required>
+      </div>
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password" placeholder="输入你的密码" required>
+      </div>
+      <div class="form-group remember">
+        <input type="checkbox" id="remember" name="remember">
+        <label for="remember">记住我</label>
+      </div>
+      <button type="submit" class="btn">登录</button>
+    </form>
+
+    <div class="auth-links">
+      <a href="{{ url_for('register') }}">注册新账号</a>
+      <a href="{{ url_for('guest_mode') }}">访客模式</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
