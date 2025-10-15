@@ -1261,6 +1261,7 @@ def api_search():
         canteen_where = "1=1" if is_canteen_keyword else "name LIKE %s"
         canteen_order = {
             'rating': 'crowd_level ASC',
+            'price': 'name ASC',
             'name': 'name ASC',
             'default': 'name ASC'
         }[sort]
@@ -1294,6 +1295,7 @@ def api_search():
         stall_order = {
             'rating': 'cs.queue_rating ASC',
             'name': 'COALESCE(cs.custom_name, st.name) ASC',
+            'price': 'COALESCE(cs.custom_name, st.name) ASC',
             'default': 'COALESCE(cs.custom_name, st.name) ASC'
         }[sort]
         
